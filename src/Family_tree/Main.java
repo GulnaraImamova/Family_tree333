@@ -1,14 +1,17 @@
 package Family_tree;
 
+import Family_tree.family_tree.FamilyTree;
+import Family_tree.writer.FileHandler;
+
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
         String filePath = "src/Family_tree/writer/tree.txt";
 
-        FamilyTree tree = read(filePath);
+        //FamilyTree tree = read(filePath);
 
-        //FamilyTree tree = testTree();
+        FamilyTree tree = testTree();
         System.out.println(tree);
 
         save(tree, filePath);

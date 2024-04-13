@@ -1,9 +1,14 @@
 package Family_tree.family_tree;
 
+import Family_tree.human.Human;
+
+import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable, Iterable<Human> {
     private long idForGen;
     private final List<Human> humanList;
 
@@ -19,9 +24,9 @@ public class FamilyTree {
         if (human == null) {
             return false;
         }
-        if (!humanList.contains(human)) {
+        if (!humanList.contains(human)){
             humanList.add(human);
-            human.setId(countPeople++);
+            human.setId(idForGen++);
 
             addToParents(human);
             addToChildren(human);
@@ -116,7 +121,7 @@ public class FamilyTree {
     }
 
     private boolean checkId(long id) {
-        return id < countPeople && id >= 0;
+        return id < idForGen && id >= 0;
     }
 
     public Human getById(long id) {
@@ -145,5 +150,18 @@ public class FamilyTree {
             sb.append("\n");
         }
         return sb.toString();
+    }
+
+    public void sortByName() {
+        humanList.sort(new HumanComparatorByName());
+    }
+
+    public void sortByDeathDate() {
+        humanList.sort(new HumanComparatorByBirthDate());
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new FamilyTreeIterator(humanList);
     }
 }

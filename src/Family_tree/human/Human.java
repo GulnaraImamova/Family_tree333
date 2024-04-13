@@ -1,5 +1,6 @@
 package Family_tree.human;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -89,7 +90,8 @@ public class Human {
 
     public int getAge() {
         if (deathDate == null) {
-            return getPeriod(birthDate, LocaleDate.now());
+            Instant LocaleDate;
+            return getPeriod(birthDate, LocalDate.now());
         } else {
             return getPeriod(birthDate, deathDate);
         }
